@@ -63,7 +63,7 @@ This block includes the Eventbrite registration widget if
 are not using Eventbrite, or leave it in, since it will not be
 displayed if the 'eventbrite' field in the header is not set.
 {% endcomment %}
-<h2>Registration for this workshop begins on May 29, 2023 at 8:00 am PST.</h2>
+<h2>Registration for this workshop begins on March 31, 2023 at 8:00 am PST.</h2>
 {% if page.eventbrite %}
 <strong>Some adblockers block the registration window. If you do not see the
   registration box below, please check your adblocker settings.</strong>
