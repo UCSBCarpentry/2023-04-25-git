@@ -65,15 +65,15 @@ displayed if the 'eventbrite' field in the header is not set.
 {% endcomment %}
 <h2>Registration for this workshop begins on March 31, 2023 at 8:00 am PST.</h2>
 {% if page.eventbrite %}
-<strong>Some adblockers block the registration window. If you do not see the
-  registration box below, please check your adblocker settings.</strong>
 <iframe
   src="https://www.eventbrite.com/tickets-external?eid={{page.eventbrite}}&ref=etckt"
   frameborder="0"
   width="100%"
-  height="280px"
+  height="420px"
   scrolling="auto">
 </iframe>
+<strong>Some adblockers block the registration window. If you do not see the
+  registration box above, please check your adblocker settings.</strong>
 {% endif %}
 
 
