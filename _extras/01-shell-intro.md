@@ -1,6 +1,5 @@
 ---
 title: "Introducing the Shell"
-start: true
 teaching: 5
 exercises: 0
 questions:
@@ -136,32 +135,5 @@ Documents   Library     Music       Public
 > is not installed.
 {: .callout}
 
-
-## Exercise Pipeline: A Typical Problem
-
-Throughout this workshop lesson, we will make progress on developing a programmatic pipeline on the files in "ex-files". In the folder exercise files, there are 1520 text files.
-The goal of the pipeline is to run all 1520 files through an imaginary program called `goostats.sh`.
-
-If we run `goostats.sh` by hand using a GUI,
-we'll have to select and open a file 1520 times.
-If `goostats.sh` takes 30 seconds to run each file, the whole process will take more than 12 hours.
-With the shell, we can instead assign the computer this mundane task.
-
-The next few lessons will explore the ways we can achieve this.
-More specifically, how we can use a command shell to run the `goostats.sh` program,
-using loops to automate the repetitive steps of entering file names,
-so that the computer can work without consistent supervision.
-
-Once we has put a processing pipeline together,
-we could use it again.
-
-In order to achieve this task, we needs to know how to:
-- navigate to a file/directory
-- create a file/directory
-- check the length of a file
-- chain commands together
-- retrieve a set of files
-- iterate over files
-- run a shell script containing our pipeline
 
 {% include links.md %}

@@ -1,15 +1,18 @@
 ---
-title: Automated Version Control
+title: Introduction
 teaching: 5
+start: true
 exercises: 0
 questions:
 - "What is version control and why should I use it?"
 objectives:
 - "Understand the benefits of an automated version control system."
 - "Understand the basics of how automated version control systems work."
+- "Explain how the shell relates to the keyboard, the screen, the operating system, and users' programs."
 keypoints:
 - "Version control is like an unlimited 'undo'."
 - "Version control also allows many people to work in parallel."
+- "A shell is a program whose primary purpose is to read commands and run other programs."
 ---
 
 We'll start by exploring how version control can be used
@@ -110,5 +113,102 @@ Taking a closer look at one of these commits, we can see what exactly has been e
 > >     problems.
 > {: .solution}
 {: .challenge}
+
+## The Shell
+
+Git is a command line tool, so we'll start the workshop with an introduction to
+working with "the shell". The shell is a program where users can type commands.
+With the shell, it's possible to invoke complicated programs like climate modeling software
+or simple commands that create an empty directory with only one line of code.
+The most popular Unix shell is Bash (the Bourne Again SHell ---
+so-called because it's derived from a shell written by Stephen Bourne).
+Bash is the default shell on most modern implementations of Unix and in most packages that provide
+Unix-like tools for Windows.
+
+Using the shell will take some effort and some time to learn.
+While a GUI presents you with choices to select, CLI choices are not automatically presented to you,
+so you must learn a few commands like new vocabulary in a language you're studying.
+However, unlike a spoken language, a small number of "words" (i.e. commands) gets you a long way,
+and we'll cover those essential few today.
+
+The grammar of a shell allows you to combine existing tools into powerful
+pipelines and handle large volumes of data automatically. Sequences of
+commands can be written into a *script*, improving the reproducibility of
+workflows.
+
+In addition, the command line is often the easiest way to interact with remote machines
+and supercomputers.
+Familiarity with the shell is near essential to run a variety of specialized tools and resources
+including high-performance computing systems.
+As clusters and cloud computing systems become more popular for scientific data crunching,
+being able to interact with the shell is becoming a necessary skill.
+We can build on the command-line skills covered here
+to tackle a wide range of scientific questions and computational challenges.
+
+Let's get started.
+
+When the shell is first opened, you are presented with a **prompt**,
+indicating that the shell is waiting for input.
+
+~~~
+$
+~~~
+{: .language-bash}
+
+The shell typically uses `$ ` as the prompt, but may use a different symbol.
+In the examples for this lesson, we'll show the prompt as `$ `.
+Most importantly:
+when typing commands, either from these lessons or from other sources,
+*do not type the prompt*, only the commands that follow it.
+Also note that after you type a command, you have to press the <kbd>Enter</kbd> key to execute it.
+
+> ## Changing your prompt
+> Your prompt may be super long (containing your username, computer name, etc.).
+> To change your prompt type in:
+>
+> ~~~
+> $ export PS1= ">"
+> ~~~
+> This will last as long as the length of your shell session.
+> {: .language-bash}
+>
+{: .callout}
+
+The prompt is followed by a **text cursor**, a character that indicates the position where your
+typing will appear.
+The cursor is usually a flashing or solid block, but it can also be an underscore or a pipe.
+You may have seen it in a text editor program, for example.
+
+So let's try our first command, `ls` which is short for listing.
+This command will list the contents of the current directory:
+
+~~~
+$ ls
+~~~
+{: .language-bash}
+
+~~~
+Desktop     Downloads   Movies      Pictures
+Documents   Library     Music       Public
+~~~
+{: .output}
+
+> ## Command not found
+> If the shell can't find a program whose name is the command you typed, it
+> will print an error message such as:
+>
+> ~~~
+> $ ks
+> ~~~
+> {: .language-bash}
+> ~~~
+> ks: command not found
+> ~~~
+> {: .output}
+>
+> This might happen if the command was mis-typed or if the program corresponding to that command
+> is not installed.
+{: .callout}
+
 
 {% include links.md %}
