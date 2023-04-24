@@ -27,11 +27,11 @@ and cons of this in a later episode.
 
 Let's start by sharing the changes we've made to our current project with the
 world.  Log in to GitHub, then click on the icon in the top right corner to
-create a new repository called `workshop-shell-scripts`:
+create a new repository called `simple-site`:
 
 ![Creating a Repository on GitHub (Step 1)](../fig/github-create-repo-01.png)
 
-Name your repository "workshop-shell-scripts" and then click "Create Repository".
+Name your repository "simple-site" and then click "Create Repository".
 
 Note: Since this repository will be connected to a local repository, it needs to be empty. Leave
 "Initialize this repository with a README" unchecked, and keep "None" as options for both "Add
@@ -48,14 +48,14 @@ information on how to configure your local repository:
 This effectively does the following on GitHub's servers:
 
 ~~~
-$ mkdir workshop-shell-scripts
-$ cd workshop-shell-scripts
+$ mkdir simple-site
+$ cd simple-site
 $ git init
 ~~~
 {: .language-bash}
 
 If you remember back to the earlier [episode](../04-changes/) where we added and
-committed our earlier work on `user-input.sh`, we had a diagram of the local repository
+committed our earlier work on `index.md`, we had a diagram of the local repository
 which looked like this:
 
 ![The Local Repository with Git Staging Area](../fig/git-staging-area.svg)
@@ -64,7 +64,7 @@ Now that we have two repositories, we need a diagram like this:
 
 ![Freshly-Made GitHub Repository](../fig/git-freshly-made-github-repo.svg)
 
-Note that our local repository still contains our earlier work on `user-input.sh`, but the
+Note that our local repository still contains our earlier work on `index.md`, but the
 remote repository on GitHub appears empty as it doesn't contain any files yet.
 
 The next step is to connect the two repositories.  We do this by making the
@@ -79,16 +79,16 @@ Click on the 'SSH' link to change the [protocol]({{ page.root }}{% link referenc
 > ## HTTPS vs. SSH
 >
 > We use SSH here because, while it requires some additional configuration, it is a
-> security protocol widely used by many applications.  The steps below describe SSH at a
+> security protocol widely used by many applications. The steps below describe SSH at a
 > minimum level for GitHub. A supplemental episode to this lesson discusses advanced setup
 > and concepts of SSH and key pairs, and other material supplemental to git related SSH.
 {: .callout}
 
-Copy that URL from the browser, go into the local `workshop-shell-scripts` repository, and run
+Copy that URL from the browser, go into the local `simple-site` repository, and run
 this command:
 
 ~~~
-$ git remote add origin git@github.com:user.name/workshop-shell-scripts.git
+$ git remote add origin git@github.com:user.name/simple-site.git
 ~~~
 {: .language-bash}
 
@@ -107,8 +107,8 @@ $ git remote -v
 {: .language-bash}
 
 ~~~
-origin   git@github.com:user.name/workshop-shell-scripts.git (fetch)
-origin   git@github.com:user.name/workshop-shell-scripts.git (push)
+origin   git@github.com:user.name/simple-site.git (fetch)
+origin   git@github.com:user.name/simple-site.git (push)
 ~~~
 {: .output}
 
@@ -297,7 +297,7 @@ Compressing objects: 100% (11/11), done.
 Writing objects: 100% (16/16), 1.45 KiB | 372.00 KiB/s, done.
 Total 16 (delta 2), reused 0 (delta 0)
 remote: Resolving deltas: 100% (2/2), done.
-To https://github.com/user.name/workshop-shell-scripts.git
+To https://github.com/user.name/simple-site.git
  * [new branch]      main -> main
 ~~~
 {: .output}
@@ -368,7 +368,7 @@ $ git pull origin main
 {: .language-bash}
 
 ~~~
-From https://github.com/user.name/workshop-shell-scripts
+From https://github.com/user.name/simple-site
  * branch            main     -> FETCH_HEAD
 Already up-to-date.
 ~~~
@@ -380,7 +380,7 @@ GitHub, though, this command would download them to our local repository.
 
 > ## GitHub GUI
 >
-> Browse to your `workshop-shell-scripts` repository on GitHub.
+> Browse to your `simple-site` repository on GitHub.
 > Under the Code tab, find and click on the text that says "XX commits" (where "XX" is some number).
 > Hover over, and click on, the three buttons to the right of each commit.
 > What information can you gather/explore from these buttons?
@@ -463,7 +463,7 @@ GitHub, though, this command would download them to our local repository.
 > > remote: Counting objects: 100% (3/3), done.
 > > remote: Total 3 (delta 0), reused 0 (delta 0), pack-reused 0
 > > Unpacking objects: 100% (3/3), done.
-> > From https://github.com/user.name/workshop-shell-scripts
+> > From https://github.com/user.name/simple-site
 > >  * branch            main     -> FETCH_HEAD
 > >  * [new branch]      main     -> origin/main
 > > fatal: refusing to merge unrelated histories
@@ -479,7 +479,7 @@ GitHub, though, this command would download them to our local repository.
 > > {: .language-bash}
 > >
 > > ~~~
-> > From https://github.com/user.name/workshop-shell-scripts
+> > From https://github.com/user.name/simple-site
 > >  * branch            main     -> FETCH_HEAD
 > > Merge made by the 'recursive' strategy.
 > > README.md | 1 +
