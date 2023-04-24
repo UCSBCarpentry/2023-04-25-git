@@ -18,60 +18,62 @@ keypoints:
 ---
 
 
-As we saw in the previous episode, we can refer to commits by their
-identifiers.  You can refer to the _most recent commit_ of the working
-directory by using the identifier `HEAD`.
+As we saw in the previous episode, we can refer to commits by their identifiers.
+You can refer to the _most recent commit_ of the working branch by using the
+identifier `HEAD`.
 
-We can track our progress by looking, so let's do that using our `HEAD`s.  Before we start,
-let's make a change to `for-loop.sh`: change "number" to "no.".
+To illustrate, let's make a change to `index.md`.
 
 ~~~
-$ nano for-loop.sh
-$ cat for-loop.sh
+$ nano index.md
+$ cat index.md
 ~~~
 {: .language-bash}
 
 ~~~
-# for-loop example
-# this for loop outputs numbers
-for variable in 1 2 3 4 5
-do
-  echo "output no. $variable"
-done
+# Seth Erickson
+
+I am a data services librarian at UCSB.
+
+My responsibilities include:
+
+- Teaching Carpentry Workshops
+- Helping students learn Git
+
+See my [reading list](reading-list.html).
+
+Contact: <my email>
 ~~~
 {: .language-bash}
 
 Now, let's see what we get.
 
 ~~~
-$ git diff HEAD for-loop.sh
+$ git diff HEAD index.md
 ~~~
 {: .language-bash}
 
 ~~~
-diff --git a/loops/for-loop.sh b/loops/for-loop.sh
-index 3045607..848cd2f 100644
---- a/loops/for-loop.sh
-+++ b/loops/for-loop.sh
-@@ -1,4 +1,4 @@
-# for-loop example
-# this for loop outputs numbers
- for variable in 1 2 3 4 5
- do
--  echo "output number $variable"
-+  echo "output no. $variable"
- done
+diff --git a/index.md b/index.md
+index d9f35ba..f9d4112 100644
+--- a/index.md
++++ b/index.md
+@@ -8,3 +8,5 @@ My responsibilities include:
+ - Helping students learn Git
+ 
+ See my [reading list](reading-list.html).
++
++Contact: serickson@ucsb.edu
 ~~~
 {: .output}
 
 which is the same as what you would get if you leave out `HEAD` (try it).  The
-real goodness in all this is when you can refer to previous commits.  We do
-that by adding `~1`
-(where "~" is "tilde", pronounced [**til**-d*uh*])
-to refer to the commit one before `HEAD`.
+real goodness in all this is when you can refer to previous commits.  We do that
+by adding `~1` (where "~" is "tilde", pronounced [**til**-d*uh*]) to refer to
+the commit one before `HEAD`.
 
 ~~~
-$ git diff HEAD~1 for-loop.sh
+$ git diff HEAD~1 index.md
 ~~~
 {: .language-bash}
 
@@ -80,22 +82,22 @@ again, but with the notation `HEAD~1`, `HEAD~2`, and so on, to refer to them:
 
 
 ~~~
-$ git diff HEAD~2 for-loop.sh
+$ git diff HEAD~2 index.md
 ~~~
 {: .language-bash}
 
 ~~~
-diff --git a/for-loop.sh b/for-loop.sh
-index de9b2a4..8006c63 100644
---- a/for-loop.sh
-+++ b/for-loop.sh
-@@ -1,4 +1,4 @@
-# for-loop example
-# this for loop outputs numbers
-+ for variable in 1 2 3 4 5
-+ do
-+  echo "output number $variable"
-+ done
+diff --git a/index.md b/index.md
+index 93d5098..f9d4112 100644
+--- a/index.md
++++ b/index.md
+@@ -7,3 +7,6 @@ My responsibilities include:
+ - Teaching Carpentry Workshops
+ - Helping students learn Git
+ 
++See my [reading list](reading-list.html).
++
++Contact: serickson@ucsb.edu
 ~~~
 {: .output}
 
@@ -104,91 +106,89 @@ well as the commit message, rather than the _differences_ between a commit and o
 working directory that we see by using `git diff`.
 
 ~~~
-$ git show HEAD~2 for-loop.sh
+$ git show HEAD~2 index.md
 ~~~
 {: .language-bash}
 
 ~~~
-commit 94456da74c0fd245cadf7b5e35eef29580f53ee5
-Author: User <user@ucsb.edu>
-Date:   Tue Dec 7 15:18:58 2021 -0800
+commit d8dd09e46f76a9e8560d57bd31ba99059eb27bad
+Author: Seth Erickson <sr.erickson@gmail.com>
+Date:   Mon Apr 24 11:19:41 2023 -0700
 
-    Add in subdir for loops
+    fixing a typo (commit #3)
 
-diff --git a/loops/for-loops.sh b/loops/for-loops.sh
-new file mode 100644
-index 0000000..e69de29
+diff --git a/index.md b/index.md
+index c826feb..93d5098 100644
+--- a/index.md
++++ b/index.md
+@@ -1,6 +1,6 @@
+ # Seth Erickson
+ 
+-I am a data services librarian at UCSB
++I am a data services librarian at UCSB.
+ 
+ My responsibilities include:
 ~~~
 {: .output}
 
-In this way,
-we can build up a chain of commits.
-The most recent end of the chain is referred to as `HEAD`;
-we can refer to previous commits using the `~` notation,
-so `HEAD~1`
-means "the previous commit",
-while `HEAD~123` goes back 123 commits from where we are now.
+In this way, we can build up a chain of commits. The most recent end of the
+chain is referred to as `HEAD`; we can refer to previous commits using the `~`
+notation, so `HEAD~1` means "the previous commit", while `HEAD~123` goes back
+123 commits from where we are now.
 
-We can also refer to commits using
-those long strings of digits and letters
-that `git log` displays.
-These are unique IDs for the changes,
-and "unique" really does mean unique:
-every change to any set of files on any computer
-has a unique 40-character identifier.
-Our `HEAD~2` comment addition was given the ID
-`7f9e4987af8d390eac5205e9a760e3f72204041c`,
-so let's try this:
+We can also refer to commits using those long strings of digits and letters that
+`git log` displays. These are unique IDs for the changes, and "unique" really
+does mean unique: every change to any set of files on any computer has a unique
+40-character identifier. Our `HEAD~2` comment addition was given the ID
+`7f9e4987af8d390eac5205e9a760e3f72204041c`, so let's try this:
 
 ~~~
-$ git diff 94456da74c0fd245cadf7b5e35eef29580f53ee5 for-loop.sh
+$ git diff d8dd09e46f76a9e8560d57bd31ba99059eb27bad index.md
 ~~~
 {: .language-bash}
 
 ~~~
-diff --git a/for-loop.sh b/for-loop.sh
-index de9b2a4..8006c63 100644
---- a/for-loop.sh
-+++ b/for-loop.sh
-@@ -1,4 +1,4 @@
-# for-loop example
-# this for loop outputs numbers
-+ for variable in 1 2 3 4 5
-+ do
-+  echo "output number $variable"
-+ done
+diff --git a/index.md b/index.md
+index 93d5098..f9d4112 100644
+--- a/index.md
++++ b/index.md
+@@ -7,3 +7,6 @@ My responsibilities include:
+ - Teaching Carpentry Workshops
+ - Helping students learn Git
+ 
++See my [reading list](reading-list.html).
++
++Contact: serickson@ucsb.edu
 ~~~
 {: .output}
 
-That's the right answer,
-but typing out random 40-character strings is annoying,
-so Git lets us use just the first few characters (typically seven for normal size projects):
+That's the right answer, but typing out random 40-character strings is annoying,
+so Git lets us use just the first few characters (typically seven for normal
+size projects):
 
 ~~~
-$ git diff 94456da for-loop.sh
+$ git diff d8dd09e index.md
 ~~~
 {: .language-bash}
 
 ~~~
-diff --git a/for-loop.sh b/for-loop.sh
-index de9b2a4..8006c63 100644
---- a/for-loop.sh
-+++ b/for-loop.sh
-@@ -1,4 +1,4 @@
-# for-loop example
-# this for loop outputs numbers
-+ for variable in 1 2 3 4 5
-+ do
-+  echo "output number $variable"
-+ done
+diff --git a/index.md b/index.md
+index 93d5098..f9d4112 100644
+--- a/index.md
++++ b/index.md
+@@ -7,3 +7,6 @@ My responsibilities include:
+ - Teaching Carpentry Workshops
+ - Helping students learn Git
+ 
++See my [reading list](reading-list.html).
++
++Contact: serickson@ucsb.edu
 ~~~
 {: .output}
 
-All right! So
-we can save changes to files and see what we've changed. Now, how
-can we restore older versions of things?
-Let's suppose we change our mind about the last update to
-`for-loop.sh` (the "ill-considered change").
+All right! So we can save changes to files and see what we've changed. Now, how
+can we restore older versions of things? Let's suppose we change our mind about
+the last update to `index.md` (the "ill-considered change").
 
 `git status` now tells us that the file has been changed,
 but those changes haven't been staged:
@@ -204,7 +204,7 @@ Changes not staged for commit:
   (use "git add <file>..." to update what will be committed)
   (use "git checkout -- <file>..." to discard changes in working directory)
 
-    modified:   for-loop.sh
+    modified:   index.md
 
 no changes added to commit (use "git add" and/or "git commit -a")
 ~~~
@@ -214,36 +214,37 @@ We can put things back the way they were
 by using `git checkout`:
 
 ~~~
-$ git checkout HEAD for-loop.sh
-$ cat for-loop.sh
+$ git checkout HEAD index.md
+$ cat index.md
 ~~~
 {: .language-bash}
 
 ~~~
-# for-loop example
-# this for loop outputs numbers
-for variable in 1 2 3 4 5
-do
-  echo "output number $variable"
-done
+# Seth Erickson
+
+I am a data services librarian at UCSB.
+
+My responsibilities include:
+
+- Teaching Carpentry Workshops
+- Helping students learn Git
+
+See my [reading list](reading-list.html).
 ~~~
 {: .output}
 
-As you might guess from its name,
-`git checkout` checks out (i.e., restores) an old version of a file.
-In this case,
-we're telling Git that we want to recover the version of the file recorded in `HEAD`,
-which is the last saved commit.
-If we want to go back even further,
-we can use a commit identifier instead:
+As you might guess from its name, `git checkout` checks out (i.e., restores) an
+old version of a file. In this case, we're telling Git that we want to recover
+the version of the file recorded in `HEAD`, which is the last saved commit. If
+we want to go back even further, we can use a commit identifier instead:
 
 ~~~
-$ git checkout 94456da for-loops.sh
+$ git checkout f14106 index.md
 ~~~
 {: .language-bash}
 
 ~~~
-$ cat for-loop.sh
+$ cat index.md
 ~~~
 {: .language-bash}
 
@@ -257,7 +258,7 @@ On branch main
 Changes to be committed:
   (use "git reset HEAD <file>..." to unstage)
 
-    modified:   for-loop.sh
+    modified:   index.md
 
 ~~~
 {: .output}
@@ -267,7 +268,7 @@ Again, we can put things back the way they were
 by using `git checkout`:
 
 ~~~
-$ git checkout HEAD for-loop.sh
+$ git checkout HEAD index.md
 ~~~
 {: .language-bash}
 
@@ -276,17 +277,17 @@ $ git checkout HEAD for-loop.sh
 > Above we used
 >
 > ~~~
-> $ git checkout 94456da for-loops.sh
+> $ git checkout f14106 index.md
 > ~~~
 > {: .language-bash}
 >
-> to revert `for-loop.sh` to its state after the commit `94456da`. But be careful!
+> to revert `index.md` to its state after the commit `f14106`. But be careful!
 > The command `checkout` has other important functionalities and Git will misunderstand
 > your intentions if you are not accurate with the typing. For example,
-> if you forget `for-loop.sh` in the previous command.
+> if you forget `index.md` in the previous command.
 >
 > ~~~
-> $ git checkout 94456da
+> $ git checkout f14106
 > ~~~
 > {: .language-bash}
 > ~~~
@@ -305,18 +306,16 @@ $ git checkout HEAD for-loop.sh
 > ~~~
 > {: .error}
 >
-> The "detached HEAD" is like "look, but don't touch" here,
-> so you shouldn't make any changes in this state.
-> After investigating your repo's past state, reattach your `HEAD` with `git checkout main`.
+> The "detached HEAD" is like "look, but don't touch" here, so you shouldn't
+> make any changes in this state. After investigating your repo's past state,
+> reattach your `HEAD` with `git checkout main`. 
 {: .callout}
 
-It's important to remember that
-we must use the commit number that identifies the state of the repository
-*before* the change we're trying to undo.
-A common mistake is to use the number of
-the commit in which we made the change we're trying to discard.
-In the example below, we want to retrieve the state from before the most
-recent commit (`HEAD~1`), which is commit `94456da`:
+It's important to remember that we must use the commit number that identifies
+the state of the repository *before* the change we're trying to undo. A common
+mistake is to use the number of the commit in which we made the change we're
+trying to discard. In the example below, we want to retrieve the state from
+before the most recent commit (`HEAD~1`), which is commit `94456da`:
 
 ![Git Checkout](../fig/git-checkout.svg)
 
@@ -335,22 +334,18 @@ here's how Git works in cartoon form:
 > ~~~
 > {: .language-bash}
 >
-> As it says,
-> `git checkout` without a version identifier restores files to the state saved in `HEAD`.
-> The double dash `--` is needed to separate the names of the files being recovered
-> from the command itself:
-> without it,
-> Git would try to use the name of the file as the commit identifier.
+> As it says, `git checkout` without a version identifier restores files to the
+> state saved in `HEAD`. The double dash `--` is needed to separate the names of
+> the files being recovered from the command itself: without it, Git would try
+> to use the name of the file as the commit identifier. 
 {: .callout}
 
-The fact that files can be reverted one by one
-tends to change the way people organize their work.
-If everything is in one large document,
-it's hard (but not impossible) to undo changes to the introduction
-without also undoing changes made later to the conclusion.
-If the introduction and conclusion are stored in separate files,
-on the other hand,
-moving backward and forward in time becomes much easier.
+The fact that files can be reverted one by one tends to change the way people
+organize their work. If everything is in one large document, it's hard (but not
+impossible) to undo changes to the introduction without also undoing changes
+made later to the conclusion. If the introduction and conclusion are stored in
+separate files, on the other hand, moving backward and forward in time becomes
+much easier.
 
 > ## Recovering Older Versions of a File
 >
@@ -489,10 +484,10 @@ moving backward and forward in time becomes much easier.
 
 > ## Checking Understanding of `git diff`
 >
-> Consider this command: `git diff HEAD~9 for-loop.sh`. What do you predict this command
+> Consider this command: `git diff HEAD~9 index.md`. What do you predict this command
 > will do if you execute it? What happens when you do execute it? Why?
 >
-> Try another command, `git diff [ID] for-loop.sh`, where [ID] is replaced with
+> Try another command, `git diff [ID] index.md`, where [ID] is replaced with
 > the unique identifier for your most recent commit. What do you think will happen,
 > and what does happen?
 {: .challenge}
@@ -501,7 +496,7 @@ moving backward and forward in time becomes much easier.
 >
 > `git checkout` can be used to restore a previous commit when unstaged changes have
 > been made, but will it also work for changes that have been staged but not committed?
-> Make a change to `for-loop.sh`, add that change, and use `git checkout` to see if
+> Make a change to `index.md`, add that change, and use `git checkout` to see if
 > you can remove your change.
 {: .challenge}
 
@@ -511,15 +506,15 @@ moving backward and forward in time becomes much easier.
 > the right commit ID, especially if the commit is from several months ago.
 >
 > Imagine the `shell-scripts` project has more than 50 files.
-> You would like to find a commit that modifies some specific text in `for-loop.sh`.
+> You would like to find a commit that modifies some specific text in `index.md`.
 > When you type `git log`, a very long list appeared.
 > How can you narrow down the search?
 >
 > Recall that the `git diff` command allows us to explore one specific file,
-> e.g., `git diff for-loop.sh`. We can apply a similar idea here.
+> e.g., `git diff index.md`. We can apply a similar idea here.
 >
 > ~~~
-> $ git log for-loop.sh
+> $ git log index.md
 > ~~~
 > {: .language-bash}
 >
@@ -531,7 +526,7 @@ moving backward and forward in time becomes much easier.
 > Is it possible to combine both? Let's try the following:
 >
 > ~~~
-> $ git log --patch for-loop.sh
+> $ git log --patch index.md
 > ~~~
 > {: .language-bash}
 >
