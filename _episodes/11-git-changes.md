@@ -18,58 +18,47 @@ keypoints:
 - "Write a commit message that accurately describes your changes."
 ---
 
-## Recall Bash Commands
+## Adding files
 
-First let's make sure we're still in the right directory. The first type of shell script we are using is called user input.
-So, we still need a subdirectory, `user-input`, inside of `shell-scripts`.
-Confirm you have `~/Desktop/shell-scripts/user-input` and that it's your working directory.
-If you are not inside `~/Desktop/shell-scripts/user-input`, recall how to move to through directories and how to make a subdirectory.
 
-## Recall Bash Commands
+Let's create a text file called `index.md` and add it to our repository. The
+file will later be converted into a webpage by GitHub pages. We'll write the
+file using a a syntax called markdown, which is why we use the `.md` extensions.
 
-Try to create an empty directory inside of `shell-scripts` called `user-input.`
+> ## Markdown
+> [Markdown](https://www.markdownguide.org/) is a language used to simplify writing HTML. Plain text characters
+> like `#` and `*` are used in place of HTML tags. These characters are then
+> processed (by GitHub pages) and transformed into HTML tags. As the name
+> Markdown suggests, the language has been trimmed down to a minimum. The most
+> frequently used elements, like headings, paragraphs, lists, tables and basic
+> text formatting (i.e. bold, italic) are part of Markdown. Markdown’s
+> simplified syntax keeps content human-readable.
+{: .callout}
 
-#### Commands
-To see what your working directory is:
-~~~
-$ pwd
-~~~
-{: .language-bash}
+We'll use `nano` to edit the file; you can use whatever editor you like. In
+particular, this does not have to be the `core.editor` you set globally earlier.
+But remember, the bash command to create or edit a new file will depend on the
+editor you choose (it might not be `nano`). For a refresher on text editors,
+check out ["Which
+Editor?"](https://swcarpentry.github.io/shell-novice/03-create/) in [The Unix
+Shell](https://swcarpentry.github.io/shell-novice/) lesson.
 
-To change directories:
-~~~
-$ cd ~/Desktop/shell-scripts
-~~~
-{: .language-bash}
-
-To create a directory, and then move to that directory:
-~~~
-$ mkdir user-input # user-input is a chosen name for our subdirectory
-$ cd user-input
-~~~
-{: .language-bash}
-
-Let's create a shell script file inside of `~desktop/shell-scripts/user-input` that is called `ui-example.sh` that contains shell scripts using user input.
-We'll use `nano` to edit the file;
-you can use whatever editor you like.
-In particular, this does not have to be the `core.editor` you set globally earlier. But remember, the bash command to create or edit a new file will depend on the editor you choose (it might not be `nano`). For a refresher on text editors, check out ["Which Editor?"](https://swcarpentry.github.io/shell-novice/03-create/) in [The Unix Shell](https://swcarpentry.github.io/shell-novice/) lesson.
 
 ~~~
-$ nano ui-example.sh
+$ nano index.md
 ~~~
 {: .language-bash}
 
-Type the text below into the `ui-example.sh` file. Save the script; recall or discuss what each command does.
+Type a few lines about yourself. (Use the `#` to create a section header).
 
 ~~~
-echo "What is your name?"
-read name
-echo "Hello $name."
+# Seth Erickson
+
+I am a data services librarian at UCSB.
 ~~~
 {: .output}
 
 Let's first verify that the file was properly created by running the list command (`ls`):
-
 
 ~~~
 $ ls
@@ -77,26 +66,24 @@ $ ls
 {: .language-bash}
 
 ~~~
-ui-example.sh
+index.md
 ~~~
 {: .output}
 
 
-`ui-example.sh` contains some lines of code, which we can see by running:
+`index.md` is a text file, which we can see by running:
 
 ~~~
-$ cat ui-example.sh
+$ cat index.md
 ~~~
 {: .language-bash}
 
 ~~~
-echo "What is your name?"
-read name
-echo "Hello $name."
+# Seth Erickson
+
+I am a data services librarian at UCSB.
 ~~~
 {: .output}
-
-Run `ui-example.sh` using the `bash` command. What do you think the `read` command does?
 
 If we check the status of our project again,
 Git tells us that it's noticed the new file:
@@ -112,9 +99,8 @@ On branch main
 No commits yet
 
 Untracked files:
-   (use "git add <file>..." to include in what will be committed)
-
-	ui-example.sh
+  (use "git add <file>..." to include in what will be committed)
+	index.md
 
 nothing added to commit but untracked files present (use "git add" to track)
 ~~~
@@ -125,7 +111,7 @@ that Git isn't keeping track of.
 We can tell Git to track a file using `git add`:
 
 ~~~
-$ git add ui-example.sh
+$ git add index.md
 ~~~
 {: .language-bash}
 
@@ -143,26 +129,24 @@ No commits yet
 
 Changes to be committed:
   (use "git rm --cached <file>..." to unstage)
-
-	new file:   ui-example.sh
-
+	new file:   index.md
 ~~~
 {: .output}
 
-Git now knows that it's supposed to keep track of `ui-example.sh`,
+Git now knows that it's supposed to keep track of `index.md`,
 but it hasn't recorded these changes as a commit yet.
 To get it to do that,
 we need to run one more command:
 
 ~~~
-$ git commit -m "Adding in an example script on user input (commit #1)"
+$ git commit -m "adding initial page content (commit #1)"
 ~~~
 {: .language-bash}
 
 ~~~
-[main (root-commit) f22b25e] Adding in an example script on user input (commit #1)
+[main (root-commit) f14106c] adding initial page content (commit #1)
  1 file changed, 3 insertions(+)
- create mode 100644 ui-example.sh
+ create mode 100644 index.md
 ~~~
 {: .output}
 
@@ -170,7 +154,7 @@ When we run `git commit`,
 Git takes everything we have told it to save by using `git add`
 and stores a copy permanently inside the special `.git` directory.
 This permanent copy is called a [commit]({{ page.root }}{% link reference.md %}#commit)
-(or [revision]({{ page.root }}{% link reference.md %}#revision)) and its short identifier is `f22b25e`. Your commit may have another identifier.
+(or [revision]({{ page.root }}{% link reference.md %}#revision)) and its short identifier is `f14106c`. Your commit may have another identifier.
 
 We use the `-m` flag (for "message")
 to record a short, descriptive, and specific comment that will help us remember later on what we did and why.
@@ -205,52 +189,55 @@ $ git log
 {: .language-bash}
 
 ~~~
-commit 8d4f409759ab29069329922c15d51ebf856aa065
-Author: user <user@ucsb.edu>
-Date:   Thu Aug 22 09:51:46 2013 -0400
+commit f14106cb34f6983fa329168c97042739e4deec77 (HEAD -> main)
+Author: Seth Erickson <xxx@yyy.com>
+Date:   Mon Apr 24 11:01:07 2023 -0700
 
-    Adding in an example script on user input (commit #1)
+    adding initial page content (commit #1)
 ~~~
 {: .output}
 
-`git log` lists all commits  made to a repository in reverse chronological order.
-The listing for each commit includes
-the commit's full identifier
-(which starts with the same characters as
-the short identifier printed by the `git commit` command earlier),
-the commit's author,
-when it was created,
-and the log message Git was given when the commit was created.
+`git log` lists all commits  made to a repository in reverse chronological
+order. The listing for each commit includes the commit's full identifier (which
+starts with the same characters as the short identifier printed by the `git
+commit` command earlier), the commit's author, when it was created, and the log
+message Git was given when the commit was created.
 
 > ## Where Are My Changes?
 >
-> If we run `ls` at this point, we will still see just one file called `ui-example.sh`.
+> If we run `ls` at this point, we will still see just one file called `index.md`.
 > That's because Git saves information about files' history
 > in the special `.git` directory mentioned earlier
 > so that our filesystem doesn't become cluttered
 > (and so that we can't accidentally edit or delete an old version).
 {: .callout}
 
-Now suppose let's add a comment to `ui-example.sh`.
-(Again, we'll edit with `nano` and then `cat` the file to show its contents;
-you may use a different editor, and don't need to `cat`.)
+Now let's add more to `index.md`. (Again, we'll edit with `nano` and then `cat`
+the file to show its contents; you may use a different editor, and don't need to
+`cat`.)
 
 ~~~
-$ nano ui-example.sh
-$ cat ui-example.sh
+$ nano index.md
 ~~~
 {: .language-bash}
 
+Let's add a list of job responsibilities. (In Markdown, a line beginning with a
+`-` and space is converted into an HTML list with bullet points.)
+
 ~~~
-# 'read' command requests user to input text
-echo "What is your name?"
-read name
-echo "Hello $name."
+# Seth Erickson
+
+I am a data services librarian at UCSB
+
+My responsibilities include:
+
+- Teaching Carpentry Workshops
+- Helping students learn Git
 ~~~
 {: .output}
 
-When we run `git status` now,
-it tells us that a file it already knows about has been modified:
+When we run `git status` now, it tells us that a file it already knows about has
+been modified:
 
 ~~~
 $ git status
@@ -261,24 +248,19 @@ $ git status
 On branch main
 Changes not staged for commit:
   (use "git add <file>..." to update what will be committed)
-  (use "git checkout -- <file>..." to discard changes in working directory)
-
-	modified:   ui-example.sh
+  (use "git restore <file>..." to discard changes in working directory)
+	modified:   index.md
 
 no changes added to commit (use "git add" and/or "git commit -a")
 ~~~
 {: .output}
 
-The last line is the key phrase:
-"no changes added to commit".
-We have changed this file,
-but we haven't told Git we will want to save those changes
-(which we do with `git add`)
-nor have we saved them (which we do with `git commit`).
-So let's do that now. It is good practice to always review
-our changes before saving them. We do this using `git diff`.
-This shows us the differences between the current state
-of the file and the most recently saved version:
+The last line is the key phrase: "no changes added to commit". We have changed
+this file, but we haven't told Git we will want to save those changes (which we
+do with `git add`) nor have we saved them (which we do with `git commit`). So
+let's do that now. It is good practice to always review our changes before
+saving them. We do this using `git diff`. This shows us the differences between
+the current state of the file and the most recently saved version:
 
 ~~~
 $ git diff
@@ -286,22 +268,26 @@ $ git diff
 {: .language-bash}
 
 ~~~
-diff --git a/user-input/ui-example.sh b/user-input/ui-example.sh
-index b5c9f2a..6db94fd 100644
---- a/user-input/ui-example.sh
-+++ b/user-input/ui-example.sh
-@@ -1,3 +1,4 @@
-+#'read' command requests user to input text
- echo "What is your name?"
- read name
- echo "Hello $name."
+diff --git a/index.md b/index.md
+index 9b284ec..c826feb 100644
+--- a/index.md
++++ b/index.md
+@@ -1,3 +1,9 @@
+ # Seth Erickson
+ 
+ I am a data services librarian at UCSB
++
++My responsibilities include:
++
++- Teaching Carpentry Workshops
++- Helping students learn Git
++
 ~~~
 {: .output}
 
-The output is cryptic because
-it is actually a series of commands for tools like editors and `patch`
-telling them how to reconstruct one file given the other.
-If we break it down into pieces:
+The output is cryptic because it is actually a series of commands for tools like
+editors and `patch` telling them how to reconstruct one file given the other. If
+we break it down into pieces:
 
 1.  The first line tells us that Git is producing output similar to the Unix `diff` command
     comparing the old and new versions of the file.
@@ -317,7 +303,7 @@ If we break it down into pieces:
 After reviewing our change, it's time to commit it:
 
 ~~~
-$ git commit -m "Add comment on what read command does (commit #2)"
+$ git commit -m "add list of responsibilities (commit #2)"
 ~~~
 {: .language-bash}
 
@@ -325,46 +311,37 @@ $ git commit -m "Add comment on what read command does (commit #2)"
 On branch main
 Changes not staged for commit:
   (use "git add <file>..." to update what will be committed)
-  (use "git checkout -- <file>..." to discard changes in working directory)
-
-	modified:   ui-example.sh
+  (use "git restore <file>..." to discard changes in working directory)
+	modified:   index.md
 
 no changes added to commit (use "git add" and/or "git commit -a")
 ~~~
 {: .output}
 
-Whoops:
-Git won't commit because we didn't use `git add` first.
-Let's fix that:
+Whoops: Git won't commit because we didn't use `git add` first. Let's fix that:
 
 ~~~
-$ git add ui-example.sh
-$ git commit -m "Add comment on what read command does (commit #2)"
+$ git add index.md
+$ git commit -m "add list of responsibilities (commit #2)"
 ~~~
 {: .language-bash}
 
 ~~~
-[main 34961b1] Add comment on what `read` command does (commit #2)
- 1 file changed, 1 insertion(+)
+[main bc5ac3e] add list of responsibilities (commit #2)
+ 1 file changed, 6 insertions(+)
 ~~~
 {: .output}
 
-Git insists that we add files to the set we want to commit
-before actually committing anything. This allows us to commit our
-changes in stages and capture changes in logical portions rather than
-only large batches.
-For example,
-suppose we're adding a few citations to relevant research to our thesis.
-We might want to commit those additions,
-and the corresponding bibliography entries,
-but *not* commit some of our work drafting the conclusion
-(which we haven't finished yet).
+Git insists that we add files to the set we want to commit before actually
+committing anything. This allows us to commit our changes in stages and capture
+changes in logical portions rather than only large batches. For example, suppose
+we're adding a few citations to relevant research to our thesis. We might want
+to commit those additions, and the corresponding bibliography entries, but *not*
+commit some of our work drafting the conclusion (which we haven't finished yet).
 
-To allow for this,
-Git has a special *staging area*
-where it keeps track of things that have been added to
-the current [changeset]({{ page.root }}{% link reference.md %}#changeset)
-but not yet committed.
+To allow for this, Git has a special *staging area* where it keeps track of
+things that have been added to the current [changeset]({{ page.root }}{% link
+reference.md %}#changeset) but not yet committed.
 
 > ## Staging Area
 >
@@ -388,22 +365,26 @@ but not yet committed.
 
 ![The Git Staging Area](../fig/git-staging-area.svg)
 
-Let's watch as our changes to a file move from our editor
-to the staging area
-and into long-term storage.
-First, move the comment to be placed below `Hello $name`. Add in more content to the comment.:
+Let's watch as our changes to a file move from our editor to the staging area
+and into long-term storage. First, let's make another change: I'll fix a typo by
+adding a period to the bio line.
 
 ~~~
-$ nano ui-example.sh
-$ cat ui-example.sh
+$ nano index.md
 ~~~
 {: .language-bash}
 
+
 ~~~
-echo "What is your name?"
-read name
-echo "Hello $name."
-#the read command requests user input, we use `$` to recall the variable established by `read`
+# Seth Erickson
+
+I am a data services librarian at UCSB.
+
+My responsibilities include:
+
+- Teaching Carpentry Workshops
+- Helping students learn Git
+
 ~~~
 {: .output}
 
@@ -413,37 +394,32 @@ $ git diff
 {: .language-bash}
 
 ~~~
-diff --git a/user-input/ui-example.sh b/user-input/ui-example.sh
-index 6db94fd..d586f12 100644
---- a/user-input/ui-example.sh
-+++ b/user-input/ui-example.sh
-@@ -1,4 +1,4 @@
--#'read' command requests user to input text
- echo "What is your name?"
- read name
- echo "Hello $name."
-+#`read` command requests user input, we use `$` to recall the variable established by `read`
+diff --git a/index.md b/index.md
+index c826feb..93d5098 100644
+--- a/index.md
++++ b/index.md
+@@ -1,6 +1,6 @@
+ # Seth Erickson
+ 
+-I am a data services librarian at UCSB
++I am a data services librarian at UCSB.
+ 
+ My responsibilities include:
 ~~~
 {: .output}
 
-So far, so good:
-we've added one line to the end of the file
-(shown with a `+` in the first column).
-Now let's put that change in the staging area
-and see what `git diff` reports:
+So far, so good. Now let's put that change in the staging area and see what `git
+diff` reports:
 
 ~~~
-$ git add ui-example.sh
+$ git add index.md
 $ git diff
 ~~~
 {: .language-bash}
 
-There is no output:
-as far as Git can tell,
-there's no difference between what it's been asked to save permanently
-and what's currently in the directory.
-However,
-if we do this:
+There is no output: as far as Git can tell, there's no difference between what
+it's been asked to save permanently and what's currently in the directory.
+However, if we do this:
 
 ~~~
 $ git diff --staged
@@ -451,30 +427,30 @@ $ git diff --staged
 {: .language-bash}
 
 ~~~
-diff --git a/user-input/ui-example.sh b/user-input/ui-example.sh
-index 6db94fd..d586f12 100644
---- a/user-input/ui-example.sh
-+++ b/user-input/ui-example.sh
-@@ -1,4 +1,4 @@
--#'read' command requests user to input text
- echo "What is your name?"
- read name
- echo "Hello $name."
+diff --git a/index.md b/index.md
+index c826feb..93d5098 100644
+--- a/index.md
++++ b/index.md
+@@ -1,6 +1,6 @@
+ # Seth Erickson
+ 
+-I am a data services librarian at UCSB
++I am a data services librarian at UCSB.
+ 
+ My responsibilities include:
 ~~~
 {: .output}
 
-it shows us the difference between
-the last committed change
-and what's in the staging area.
-Let's save our changes:
+it shows us the difference between the last committed change and what's in the
+staging area. Let's save our changes:
 
 ~~~
-$ git commit -m "Adding more notes about read (commit #3)"
+$ git commit -m "fixing a typo (commit #3)"
 ~~~
 {: .language-bash}
 
 ~~~
-[main 005937f] "Adding more notes about read command (commit #3)"
+[main d8dd09e] fixing a typo (commit #3)
  1 file changed, 1 insertion(+), 1 deletion(-)
 ~~~
 {: .output}
@@ -500,23 +476,23 @@ $ git log
 {: .language-bash}
 
 ~~~
-commit d2f536d6198f12ebba1849af49405a4f54845dd6 (HEAD -> main)
-Author: user <user@ucsb.edu>
-Date:   Thu Aug 22 10:14:07 2013 -0400
+commit d8dd09e46f76a9e8560d57bd31ba99059eb27bad (HEAD -> main)
+Author: Seth Erickson <...>
+Date:   Mon Apr 24 11:19:41 2023 -0700
 
-    Adding more notes about read command (commit #3)
+    fixing a typo (commit #3)
 
-commit b798ee602bd76b92c39d8c62c6637d36109365e4
-Author: user <user@ucsb.edu>
-Date:   Thu Aug 22 10:07:21 2013 -0400
+commit bc5ac3ec2412f7e4bfb4da2d7085d3df4cc514ea
+Author: Seth Erickson <...>
+Date:   Mon Apr 24 11:11:40 2023 -0700
 
-    Add comment on what read command does (commit #2)
+    add list of responsibilities (commit #2)
 
-commit 8d4f409759ab29069329922c15d51ebf856aa065
-Author: user <user@ucsb.edu>
-Date:   Thu Aug 22 09:51:46 2013 -0400
+commit f14106cb34f6983fa329168c97042739e4deec77
+Author: Seth Erickson <...>
+Date:   Mon Apr 24 11:01:07 2023 -0700
 
-    Adding in an example script on user input (commit #1)
+    adding initial page content (commit #1)
 ~~~
 {: .output}
 
@@ -556,11 +532,12 @@ Date:   Thu Aug 22 09:51:46 2013 -0400
 > {: .language-bash}
 >
 > ~~~
-> commit 005937fbe2a98fb83f0ade869025dc2636b4dad5 (HEAD -> main)
-> Author: user <user@ucsb.edu>
-> Date:   Thu Aug 22 10:14:07 2013 -0400
->
->    Adding more notes about read command (commit #3)
+> commit d8dd09e46f76a9e8560d57bd31ba99059eb27bad (HEAD -> main)
+> Author: Seth Erickson <...>
+> Date:   Mon Apr 24 11:19:41 2023 -0700
+> 
+>     fixing a typo (commit #3)
+> (END)
 > ~~~
 > {: .output}
 >
@@ -572,9 +549,9 @@ Date:   Thu Aug 22 09:51:46 2013 -0400
 > ~~~
 > {: .language-bash}
 > ~~~
-> 005937f (HEAD -> main) Adding more notes about read command (commit #3)
-> 34961b1 Add comment on what `read` command does (commit #2)
-> f22b25e Adding in an example script on user input (commit #1)
+> d8dd09e (HEAD -> main) fixing a typo (commit #3)
+> bc5ac3e add list of responsibilities (commit #2)
+> f14106c adding initial page content (commit #1)
 > ~~~
 > {: .output}
 >
@@ -589,9 +566,9 @@ Date:   Thu Aug 22 09:51:46 2013 -0400
 > ~~~
 > {: .language-bash}
 > ~~~
-> * 005937f (HEAD -> main) Adding more notes about read command (commit #3)
-> * 34961b1 Add comment on what `read` command does (commit #2)
-> * f22b25e Adding in an example script on user input (commit #1)
+> * d8dd09e (HEAD -> main) fixing a typo (commit #3)
+> * bc5ac3e add list of responsibilities (commit #2)
+> * f14106c adding initial page content (commit #1)
 > ~~~
 > {: .output}
 {: .callout}
@@ -604,39 +581,30 @@ Two important facts you should know about directories in Git:
 2.   If you can create a directory in your Git repository and populate it with files,
      you can add all the files in the directory at once.  
 
-Create a new directory named 'loops'
+Create a new directory named `images`
 We will be using this directory in the following lessons so please follow along.
 
 ~~~
-$ cd ..
-$ mkdir loops
+$ mkdir images
 $ git status
-$ git add loops
+$ git add images
 $ git status
 ~~~
 {: .language-bash}
 
-Note, our newly created empty directory `loops` does not appear in
+Note, our newly created empty directory `images` does not appear in
 the list of untracked files even if we explicitly add it (_via_ `git add`) to our
 repository. This is the reason why you will sometimes see `.gitkeep` files
 in otherwise empty directories. Unlike `.gitignore`, these files are not special
 and their sole purpose is to populate a directory so that Git adds it to
 the repository. In fact, you can name such files anything you like.
 
-Add multiple files to a directory at once.  
-Try adding a new for-loop.sh file into your new subdirectory
+Try adding an empty file in our new directory:
 
 ~~~
-git add <directory-with-files>
-~~~
-{: .language-bash}
-
-Try it for yourself:
-
-~~~
-$ touch loops/for-loop.sh
+$ touch images/.gitkeep
 $ git status
-$ git add loops
+$ git add images
 $ git status
 ~~~
 {: .language-bash}
@@ -644,15 +612,13 @@ $ git status
 Before moving on, we will commit these changes.
 
 ~~~
-$ git commit -m "Add in subdir for loops"
-$ cd loops
+$ git commit -m "Add images folder"
 ~~~
 {: .language-bash}
 
-To recap, when we want to add changes to our repository,
-we first need to add the changed files to the staging area
-(`git add`) and then commit the staged changes to the
-repository (`git commit`):
+To recap, when we want to add changes to our repository, we first need to add
+the changed files to the staging area (`git add`) and then commit the staged
+changes to the repository (`git commit`):
 
 ![The Git Commit Workflow](../fig/git-committing.svg)
 
@@ -691,127 +657,35 @@ repository (`git commit`):
 
 #### Committing Multiple Files
 
-The staging area can hold changes from any number of files
-that you want to commit as a single snapshot. The goals for the rest of this lesson are:
+The staging area can hold changes from any number of files that you want to
+commit as a single snapshot. The goals for the rest of this lesson are:
 
-1. Add some text to `for-loop.sh`
-2. Create a new file `notes-for-loop.txt`
+1. Add some text to `index.md`
+2. Create a new file `reading-list.md` with a list of books you want to read
 3. Add changes from both files to the staging area, and commit those changes.
 
-First we make our changes to the for-loop.sh` files:
-~~~
-$ nano for-loop.sh
-$ cat for-loop.sh
-~~~
-{: .language-bash}
-~~~
-# for-loop example
-# this for loop outputs numbers
-~~~
-{: .output}
+You can add both files to the staging area. We can do that in one line:
 
 ~~~
-$ nano notes-for-loop.txt
-$ cat notes-for-loop.txt
-~~~
-{: .language-bash}
-~~~
-For loops start with `for` and ends with `done`.
-~~~
-{: .output}
-
-Now you can add both files to the staging area. We can do that in one line:
-
-~~~
-$ git add for-loop.sh notes-for-loop.txt
+$ git add index.md reading-list.md
 ~~~
 {: .language-bash}
 Or with multiple commands:
 ~~~
-$ git add for-loop.sh
-$ git add notes-for-loop.txt
+$ git add index.md
+$ git add reading-list.md
 ~~~
 {: .language-bash}
 Now the files are ready to commit. You can check that using `git status`. If you are ready to commit use:
 ~~~
-$ git commit -m "Add in for loop example"
+$ git commit -m "update page and add reading list"
 ~~~
 {: .language-bash}
 ~~~
-[main 7f9e498] add in for loop example
-2 files changed, 3 insertions(+)
-create mode 100644 for-loop.sh
-create mode 100644 notes-for-loop.txt
+[main 86abfdb] add reading list
+ 2 files changed, 2 insertions(+)
+ create mode 100644 reading-list.md
 ~~~
-
-Add in and commit the script of the for-loop example.
-Think about how the structure of this for loop works.
-
-~~~
-# for-loop example
-# this for loop outputs numbers
-
-for variable in 1 2 3 4 5
-do
-  echo "output number $variable"
-done
-~~~
-{: .language-bash}
-
-
-> ## `bio` Repository
->
-> * Create a new Git repository on your computer called `bio`.
-> * Write a three-line biography for yourself in a file called `me.txt`,
-> commit your changes
-> * Modify one line, add a fourth line
-> * Display the differences
-> between its updated state and its original state.
->
-> > ## Solution
-> >
-> > If needed, move out of the `shell-scripts` folder:
-> >
-> > ~~~
-> > $ cd ..
-> > ~~~
-> > {: .language-bash}
-> >
-> > Create a new folder called `bio` and 'move' into it:
-> >
-> > ~~~
-> > $ mkdir bio
-> > $ cd bio
-> > ~~~
-> > {: .language-bash}
-> >
-> > Initialise git:
-> >
-> > ~~~
-> > $ git init
-> > ~~~
-> > {: .language-bash}
-> >
-> > Create your biography file `me.txt` using `nano` or another text editor.
-> > Once in place, add and commit it to the repository:
-> >
-> > ~~~
-> > $ git add me.txt
-> > $ git commit -m "Add biography file"
-> > ~~~
-> > {: .language-bash}
-> >
-> > Modify the file as described (modify one line, add a fourth line).
-> > To display the differences
-> > between its updated state and its original state, use `git diff`:
-> >
-> > ~~~
-> > $ git diff me.txt
-> > ~~~
-> > {: .language-bash}
-> >
-> {: .solution}
-{: .challenge}
 
 [commit-messages]: https://chris.beams.io/posts/git-commit/
 [git-references]: https://git-scm.com/book/en/v2/Git-Internals-Git-References
