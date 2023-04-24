@@ -74,6 +74,7 @@ of git.
 See the setup episode for more information on this change.
 
 ~~~
+# only necessary if default branch is 'master'
 git checkout -b main
 ~~~
 {: .language-bash}

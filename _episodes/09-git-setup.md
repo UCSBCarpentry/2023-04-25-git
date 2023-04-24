@@ -20,8 +20,7 @@ of configurations we will set as we get started with Git:
 *   and that we want to use these settings globally (i.e. for every project).
 
 On a command line, Git commands are written as `git verb options`,
-where `verb` is what we actually want to do and `options` is additional optional information which may be needed for the `verb`. So here is how
-Dracula sets up his new laptop:
+where `verb` is what we actually want to do and `options` is additional optional information which may be needed for the `verb`. Here is how you can setup your user settings:
 
 ~~~
 $ git config --global user.name "Your Name"
@@ -76,7 +75,7 @@ For this lesson, we will be interacting with [GitHub](https://github.com/) and s
 >
 {: .callout}
 
-Dracula also has to set his favorite text editor, following this table:
+Git uses a text editor for writing commit messages. The following table describes how to set Git to use various editors you may have installed:
 
 | Editor             | Configuration command                            |
 |:-------------------|:-------------------------------------------------|
@@ -106,8 +105,7 @@ your changes, press <kbd>Esc</kbd> then type `:q!` and hit <kbd>Return</kbd>.
 {: .callout}
 
 Git (2.28+) allows configuration of the name of the branch created when you
-initialize any new repository.  Dracula decides to use that feature to set it to `main` so
-it matches the cloud service he will eventually use.
+initialize any new repository. To set it to `main` (so it matches GitHub), use:
 
 ~~~
 $ git config --global init.defaultBranch main
@@ -120,16 +118,14 @@ $ git config --global init.defaultBranch main
 > For new learners in this lesson, it's enough to know that branches exist, and this lesson uses one branch.  
 > By default, Git will create a branch called `master`
 > when you create a new repository with `git init` (as explained in the next Episode). This term evokes
-> the racist practice of human slavery and the
-> [software development community](https://github.com/github/renaming)  has moved to adopt
-> more inclusive language.
+> the legacy of racialized slavery and many Git users prefer a different name for the default branch.
 >
 > In 2020, most Git code hosting services transitioned to using `main` as the default
 > branch. As an example, any new repository that is opened in GitHub and GitLab default
 > to `main`.  However, Git has not yet made the same change.  As a result, local repositories
 > must be manually configured have the same main branch name as most cloud services.  
 >
-> For versions of Git prior to 2.28, the change can be made on an individual repository level.  The
+> For versions of Git prior to __2.28__, the change can be made on an individual repository level.  The
 > command for this is in the next episode.  Note that if this value is unset in your local Git
 > configuration, the `init.defaultBranch` value defaults to `master`.
 >
