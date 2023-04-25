@@ -42,15 +42,15 @@ To clone the Owner's repo into
 her `Desktop` folder, the Collaborator enters:
 
 ~~~
-$ git clone https://github.com/User/shell-scripts.git ~/Desktop/user.name-shell-scripts
+$ git clone https://github.com/User/simple-site.git ~/Desktop/user.name-simple-site
 ~~~
 {: .language-bash}
 
 Replace 'user name' with the Owner's username or name.
 
 If you choose to clone without the clone path
-(`~/Desktop/user.name-shell-scripts`) specified at the end,
-you will clone inside your own shell-scripts folder!
+(`~/Desktop/user.name-simple-site`) specified at the end,
+you will clone inside your own simple-site folder!
 Make sure to navigate to the `Desktop` folder first.
 
 ![After Creating Clone of Repository](../fig/github-collaboration.svg)
@@ -59,9 +59,9 @@ The Collaborator can now make a change in her clone of the Owner's repository,
 exactly the same way as we've been doing before:
 
 ~~~
-$ cd ~/Desktop/user.name-shell-scripts/loops
-$ nano for-loop.sh
-$ cat for-loop.sh
+$ cd ~/Desktop/user.name-simple-site
+$ nano index.md
+$ cat index.md
 ~~~
 {: .language-bash}
 
@@ -74,7 +74,7 @@ done
 {: .output}
 
 ~~~
-$ git add for-loop.sh
+$ git add index.md
 $ git commit -m "expand list of numbers"
 ~~~
 {: .language-bash}
@@ -98,7 +98,7 @@ Delta compression using up to 4 threads.
 Compressing objects: 100% (2/2), done.
 Writing objects: 100% (3/3), 306 bytes, done.
 Total 3 (delta 0), reused 0 (delta 0)
-To https://github.com/user/shell-scripts.git
+To https://github.com/user/simple-site.git
    9272da5..29aba7c  main -> main
 ~~~
 {: .output}
@@ -156,14 +156,14 @@ remote: Counting objects: 100% (4/4), done.
 remote: Compressing objects: 100% (2/2), done.
 remote: Total 3 (delta 0), reused 3 (delta 0), pack-reused 0
 Unpacking objects: 100% (3/3), done.
-From https://github.com/User/shell-scripts
+From https://github.com/User/simple-site
  * branch            main     -> FETCH_HEAD
    9272da5..29aba7c  main     -> origin/main
 Updating 9272da5..29aba7c
 Fast-forward
- for-loop.sh | 1 +
+ index.md | 1 +
  1 file changed, 1 insertion(+)
- create mode 100644 for-loop.sh
+ create mode 100644 index.md
 ~~~
 {: .output}
 
