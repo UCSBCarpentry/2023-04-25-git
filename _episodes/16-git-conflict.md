@@ -13,55 +13,70 @@ keypoints:
 ---
 
 As soon as people can work in parallel, they'll likely step on each other's
-toes.  This will even happen with a single person: if we are working on
-a piece of software on both our laptop and a server in the lab, we could make
-different changes to each copy.  Version control helps us manage these
-[conflicts]({{ page.root}}{% link reference.md %}#conflict) by giving us tools to
-[resolve]({{ page.root }}{% link reference.md %}#resolve) overlapping changes.
+toes. This will even happen with a single person: if we are working on a piece
+of software on both our laptop and a server in the lab, we could make different
+changes to each copy.  Version control helps us manage these [conflicts]({{
+page.root}}{% link reference.md %}#conflict) by giving us tools to [resolve]({{
+page.root }}{% link reference.md %}#resolve) overlapping changes.
 
-To see how we can resolve conflicts, we must first create one.  The file
-`user-input.sh` currently looks like this in both partners' copies of our `shell-script`
-repository:
+To see how we can resolve conflicts, we must first create one. The file
+`index.md` currently looks something like this in both partners' copies of our
+`simple-site` repository:
 
 ~~~
-$ cat user-input.sh
+$ cat index.md
 ~~~
 {: .language-bash}
 
 ~~~
-echo "What is your name?"
-read name
-echo "Hello $name."
+# Seth Erickson
+
+I am a data services librarian at UCSB.
+
+My responsibilities include:
+
+- Teaching Carpentry Workshops
+- Helping students learn Git
+
+See my [reading list](reading-list.html).
 ~~~
 {: .output}
 
-Let's add a line to the collaborator's copy only:
-
+What if the collaborator adds their own biographical details to the files:
 ~~~
-$ nano user-input.sh
-$ cat user-input.sh
+$ nano index.md
+$ cat index.md
 ~~~
 {: .language-bash}
 
 ~~~
-echo "What is your name?"
-read name
-echo "Hello $name."
-#the read command requests user input, we use `$` to recall the variable established by `read`
-#this line is added by collaborator
+# Jon Jablonski
+
+I am the Directory of the DREAM Lab.
+
+# Seth Erickson
+
+I am a data services librarian at UCSB.
+
+My responsibilities include:
+
+- Teaching Carpentry Workshops
+- Helping students learn Git
+
+See my [reading list](reading-list.html).
 ~~~
 {: .output}
 
 and then push the change to GitHub:
 
 ~~~
-$ git add user-input.sh
-$ git commit -m "Add a line in our home copy"
+$ git add index.md
+$ git commit -m "Add Jon to index.md"
 ~~~
 {: .language-bash}
 
 ~~~
-[main 5ae9631] Add a line in our home copy
+[main 5ae9631] Add Jon to index.md
  1 file changed, 1 insertion(+)
 ~~~
 {: .output}
@@ -79,7 +94,7 @@ Compressing objects: 100% (3/3), done.
 Writing objects: 100% (3/3), 331 bytes | 331.00 KiB/s, done.
 Total 3 (delta 2), reused 0 (delta 0)
 remote: Resolving deltas: 100% (2/2), completed with 2 local objects.
-To https://github.com/user/shell-script.git
+To https://github.com/user/simple-site.git
    29aba7c..dabb4c8  main -> main
 ~~~
 {: .output}
@@ -89,30 +104,37 @@ make a different change to their copy
 *without* updating from GitHub:
 
 ~~~
-$ nano user-input.sh
-$ cat user-input.sh
+$ nano index.md
+$ cat index.md
 ~~~
 {: .language-bash}
 
+Let's use `##` instead of `#` to use a smaller font size in the heading:
+
 ~~~
-echo "What is your name?"
-read name
-echo "Hello $name."
-#the read command requests user input, we use `$` to recall the variable established by `read`
-#this line is added by Owner
+## Seth Erickson
+
+I am a data services librarian at UCSB.
+
+My responsibilities include:
+
+- Teaching Carpentry Workshops
+- Helping students learn Git
+
+See my [reading list](reading-list.html).
 ~~~
 {: .output}
 
 We can commit the change locally:
 
 ~~~
-$ git add user-input.sh
-$ git commit -m "Add a line in my copy"
+$ git add index.md
+$ git commit -m "use smaller heading"
 ~~~
 {: .language-bash}
 
 ~~~
-[main 07ebc69] Add a line in my copy
+[main 07ebc69] use smaller heading
  1 file changed, 1 insertion(+)
 ~~~
 {: .output}
@@ -125,9 +147,9 @@ $ git push origin main
 {: .language-bash}
 
 ~~~
-To https://github.com/user/shell-script.git
+To https://github.com/user/simple-site.git
  ! [rejected]        main -> main (fetch first)
-error: failed to push some refs to 'https://github.com/user/shell-script.git'
+error: failed to push some refs to 'https://github.com/user/simple-site.git'
 hint: Updates were rejected because the remote contains work that you do
 hint: not have locally. This is usually caused by another repository pushing
 hint: to the same ref. You may want to first integrate the remote changes
@@ -155,37 +177,46 @@ remote: Counting objects: 100% (5/5), done.
 remote: Compressing objects: 100% (1/1), done.
 remote: Total 3 (delta 2), reused 3 (delta 2), pack-reused 0
 Unpacking objects: 100% (3/3), done.
-From https://github.com/user/shell-script
+From https://github.com/user/simple-site
  * branch            main     -> FETCH_HEAD
     29aba7c..dabb4c8  main     -> origin/main
-Auto-merging user-input.sh
-CONFLICT (content): Merge conflict in user-input.sh
+Auto-merging index.md
+CONFLICT (content): Merge conflict in index.md
 Automatic merge failed; fix conflicts and then commit the result.
 ~~~
 {: .output}
 
-The `git pull` command updates the local repository to include those
-changes already included in the remote repository.
-After the changes from remote branch have been fetched, Git detects that changes made to the local copy
-overlap with those made to the remote repository, and therefore refuses to merge the two versions to
-stop us from trampling on our previous work. The conflict is marked in
-in the affected file:
+The `git pull` command updates the local repository to include those changes
+already included in the remote repository. After the changes from remote branch
+have been fetched, Git detects that changes made to the local copy overlap with
+those made to the remote repository, and therefore refuses to merge the two
+versions to stop us from trampling on our previous work. The conflict is marked
+in in the affected file:
 
 ~~~
-$ cat user-input.sh
+$ cat index.md
 ~~~
 {: .language-bash}
 
 ~~~
-echo "What is your name?"
-read name
-echo "Hello $name."
-#the read command requests user input, we use `$` to recall the variable established by `read`
 <<<<<<< HEAD
-We added a different line in the other copy
+## Seth Erickson
 =======
-This line added to their copy
->>>>>>> dabb4c8c450e8475aee9b14b4383acc99f42af1d
+# Jon Jablonski
+
+I am the Director of the DREAM Lab
+
+# Seth Erickson
+>>>>>>> 004b4d5f9a599a92d6a19c5c82a362d8126f4403
+
+I am a data services librarian at UCSB.
+
+My responsibilities include:
+
+- Teaching Carpentry Workshops
+- Helping students learn Git
+
+See my [reading list](reading-list.html).
 ~~~
 {: .output}
 
@@ -203,25 +234,34 @@ or get rid of the change entirely.
 Let's replace both so that the file looks like this:
 
 ~~~
-$ cat user-input.sh
+$ cat index.md
 ~~~
 {: .language-bash}
 
 ~~~
-echo "What is your name?"
-read name
-echo "Hello $name."
-#the read command requests user input, we use `$` to recall the variable established by `read`
-#We removed the conflict on this line
+## Jon Jablonski
+
+I am the Director of the DREAM Lab
+
+## Seth Erickson
+
+I am a data services librarian at UCSB.
+
+My responsibilities include:
+
+- Teaching Carpentry Workshops
+- Helping students learn Git
+
+See my [reading list](reading-list.html).
 ~~~
 {: .output}
 
 To finish merging,
-we add `user-input.sh` to the changes being made by the merge
+we add `index.md` to the changes being made by the merge
 and then commit:
 
 ~~~
-$ git add user-input.sh
+$ git add index.md
 $ git status
 ~~~
 {: .language-bash}
@@ -233,7 +273,7 @@ All conflicts fixed but you are still merging.
 
 Changes to be committed:
 
-	modified:   user-input.sh
+	modified:   index.md
 
 ~~~
 {: .output}
@@ -263,7 +303,7 @@ Compressing objects: 100% (6/6), done.
 Writing objects: 100% (6/6), 645 bytes | 645.00 KiB/s, done.
 Total 6 (delta 4), reused 0 (delta 0)
 remote: Resolving deltas: 100% (4/4), completed with 2 local objects.
-To https://github.com/user/shell-script.git
+To https://github.com/user/simple-site.git
    dabb4c8..2abf2b1  main -> main
 ~~~
 {: .output}
@@ -283,12 +323,12 @@ remote: Counting objects: 100% (10/10), done.
 remote: Compressing objects: 100% (2/2), done.
 remote: Total 6 (delta 4), reused 6 (delta 4), pack-reused 0
 Unpacking objects: 100% (6/6), done.
-From https://github.com/user/shell-script
+From https://github.com/user/simple-site
  * branch            main     -> FETCH_HEAD
     dabb4c8..2abf2b1  main     -> origin/main
 Updating dabb4c8..2abf2b1
 Fast-forward
- user-input.sh | 2 +-
+ index.md | 2 +-
  1 file changed, 1 insertion(+), 1 deletion(-)
 ~~~
 {: .output}
@@ -296,16 +336,25 @@ Fast-forward
 We get the merged file:
 
 ~~~
-$ cat user-input.sh
+$ cat index.md
 ~~~
 {: .language-bash}
 
 ~~~
-echo "What is your name?"
-read name
-echo "Hello $name."
-#the read command requests user input, we use `$` to recall the variable established by `read`
-#We removed the conflict on this line
+## Jon Jablonski
+
+I am the Director of the DREAM Lab
+
+## Seth Erickson
+
+I am a data services librarian at UCSB.
+
+My responsibilities include:
+
+- Teaching Carpentry Workshops
+- Helping students learn Git
+
+See my [reading list](reading-list.html).
 ~~~
 {: .output}
 
@@ -403,9 +452,9 @@ Conflicts can also be minimized with project management strategies:
 > > {: .language-bash}
 > >
 > > ~~~
-> > To https://github.com/user/shell-script.git
+> > To https://github.com/user/simple-site.git
 > >  ! [rejected]        main -> main (fetch first)
-> > error: failed to push some refs to 'https://github.com/user/shell-script.git'
+> > error: failed to push some refs to 'https://github.com/user/simple-site.git'
 > > hint: Updates were rejected because the remote contains work that you do
 > > hint: not have locally. This is usually caused by another repository pushing
 > > hint: to the same ref. You may want to first integrate the remote changes
@@ -430,7 +479,7 @@ Conflicts can also be minimized with project management strategies:
 > > remote: Compressing objects: 100% (3/3), done.
 > > remote: Total 3 (delta 0), reused 0 (delta 0)
 > > Unpacking objects: 100% (3/3), done.
-> > From https://github.com/user/shell-script.git
+> > From https://github.com/user/simple-site.git
 > >  * branch            main     -> FETCH_HEAD
 > >    6a67967..439dc8c  main     -> origin/main
 > > warning: Cannot merge binary files: ex-files.jpg (HEAD vs. 439dc8c08869c342438f6dc4a2b615b05b93c76e)
@@ -440,7 +489,7 @@ Conflicts can also be minimized with project management strategies:
 > > ~~~
 > > {: .output}
 > >
-> > The conflict message here is mostly the same as it was for `user-input.sh`, but
+> > The conflict message here is mostly the same as it was for `index.md`, but
 > > there is one key additional line:
 > >
 > > ~~~
@@ -520,44 +569,3 @@ Conflicts can also be minimized with project management strategies:
 > {: .solution}
 {: .challenge}
 
-> ## A Typical Work Session
->
-> You sit down at your computer to work on a shared project that is tracked in a
-> remote Git repository. During your work session, you take the following
-> actions, but not in this order:
->
-> - *Make changes* by appending the number `100` to a text file `numbers.txt`
-> - *Update remote* repository to match the local repository
-> - *Celebrate* your success with some fancy beverage(s)
-> - *Update local* repository to match the remote repository
-> - *Stage changes* to be committed
-> - *Commit changes* to the local repository
->
-> In what order should you perform these actions to minimize the chances of
-> conflicts? Put the commands above in order in the *action* column of the table
-> below. When you have the order right, see if you can write the corresponding
-> commands in the *command* column. A few steps are populated to get you
-> started.
->
-> |order|action . . . . . . . . . . |command . . . . . . . . . . |
-> |-----|---------------------------|----------------------------|
-> |1    |                           |                            |
-> |2    |                           | `echo 100 >> numbers.txt`  |
-> |3    |                           |                            |
-> |4    |                           |                            |
-> |5    |                           |                            |
-> |6    | Celebrate!                | `AFK`                      |
->
-> > ## Solution
-> >
-> > |order|action . . . . . . |command . . . . . . . . . . . . . . . . . . . |
-> > |-----|-------------------|----------------------------------------------|
-> > |1    | Update local      | `git pull origin main`                     |
-> > |2    | Make changes      | `echo 100 >> numbers.txt`                    |
-> > |3    | Stage changes     | `git add numbers.txt`                        |
-> > |4    | Commit changes    | `git commit -m "Add 100 to numbers.txt"`     |
-> > |5    | Update remote     | `git push origin main`                     |
-> > |6    | Celebrate!        | `AFK`                                        |
-> >
-> {: .solution}
-{: .challenge}
