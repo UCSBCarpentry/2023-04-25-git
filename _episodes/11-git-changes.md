@@ -23,7 +23,7 @@ keypoints:
 
 Let's create a text file called `index.md` and add it to our repository. The
 file will later be converted into a webpage by GitHub pages. We'll write the
-file using a a syntax called markdown, which is why we use the `.md` extensions.
+file using a syntax called Markdown, which is why we use the `.md` extensions.
 
 > ## Markdown
 > [Markdown](https://www.markdownguide.org/) is a language used to simplify writing HTML. Plain text characters
@@ -54,7 +54,7 @@ Type a few lines about yourself. (Use the `#` to create a section header).
 ~~~
 # Seth Erickson
 
-I am a data services librarian at UCSB.
+I am a data services librarian at UCSB
 ~~~
 {: .output}
 
@@ -81,7 +81,7 @@ $ cat index.md
 ~~~
 # Seth Erickson
 
-I am a data services librarian at UCSB.
+I am a data services librarian at UCSB
 ~~~
 {: .output}
 
