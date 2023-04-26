@@ -29,6 +29,9 @@ $ cat index.md
 {: .language-bash}
 
 ~~~
+---
+title: Home
+---
 # Seth Erickson
 
 I am a data services librarian at UCSB.
@@ -50,6 +53,10 @@ $ cat index.md
 {: .language-bash}
 
 ~~~
+---
+title: Home
+---
+
 # Jon Jablonski
 
 I am the Directory of the DREAM Lab.

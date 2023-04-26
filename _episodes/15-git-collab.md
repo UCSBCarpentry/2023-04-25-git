@@ -56,7 +56,7 @@ Make sure to navigate to the `Desktop` folder first.
 ![After Creating Clone of Repository](../fig/github-collaboration.svg)
 
 The Collaborator can now make a change in her clone of the Owner's repository,
-exactly the same way as we've been doing before:
+exactly the same way as we've been doing before. Let's add 'front matter' used by github pages.
 
 ~~~
 $ cd ~/Desktop/user.name-simple-site
@@ -66,16 +66,25 @@ $ cat index.md
 {: .language-bash}
 
 ~~~
-for variable in 1 2 3 4 5 6
-do
-  echo "output no. $variable"
-done
+---
+title: Home
+---
+# Seth Erickson
+
+I am a data services librarian at UCSB.
+
+My responsibilities include:
+
+- Teaching Carpentry Workshops
+- Helping students learn Git
+
+See my [reading list](reading-list.html).
 ~~~
 {: .output}
 
 ~~~
 $ git add index.md
-$ git commit -m "expand list of numbers"
+$ git commit -m "add frontmatter change"
 ~~~
 {: .language-bash}
 
